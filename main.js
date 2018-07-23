@@ -1,5 +1,6 @@
 const images = document.getElementsByClassName('slider-img');
 const box = document.getElementsByClassName('box');
+const slider = document.getElementsByClassName('slider');
 
 let current = 0;
 let imagesArray = [];
@@ -10,7 +11,8 @@ for (let i = 0; i < images.length; i++) {
   imagesArray.push(image);
 }
 
-imagesArray[current].style.display = 'block';
+imagesArray[current].style.left = '0';
+slider[0].style.height = imagesArray[current].clientHeight+'px';
 box["0"].style.backgroundColor = "#0054a4";
 
 function plus(number) {
@@ -31,12 +33,14 @@ function plusLeft(number) {
 }
 
 function showHide(number) {
+  slider[0].style.height = imagesArray[current].clientHeight+'px';
+  
   if (number || number == 0) {
     for (let i = 0; i < imagesArray.length; i++) {
       const image = imagesArray[i];
-      image.style.display = 'none';
+      image.style.left = '100%';
     }
-    imagesArray[number].style.display = 'block';
+    imagesArray[number].style.left = '0';
     for (let i = 0; i < box.length; i++) {
       const boxes = box[i];
       if (boxes.classList.contains(number)) {
@@ -55,17 +59,17 @@ function showHide(number) {
 
   for (let i = 0; i < imagesArray.length; i++) {
     const image = imagesArray[i];
-    image.style.display = 'none';
+    image.style.left = '-100%';
   }
 
   if (current >= imagesArray.length - 1) {
-    imagesArray[current].style.display = 'none';
-    imagesArray[0].style.display = 'block';
+    imagesArray[current].style.left = '100%';
+    imagesArray[0].style.left = '0';
     current = 0;
   } else {
-    imagesArray[current].style.display = 'none';
+    imagesArray[current].style.left = '100%';
     current++;
-    imagesArray[current].style.display = 'block';
+    imagesArray[current].style.left = '0';
   }
 
 
